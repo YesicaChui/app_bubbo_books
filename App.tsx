@@ -3,13 +3,12 @@ import {
   Text,
   View,
 } from 'react-native';
+import HomeScreen from './src/screens/HomeScreen';
 
 function App() {
   return (
     <>
-      <View>
-        <Text>Hola desde react native</Text>
-      </View>
+      <HomeScreen/>
     </>
   );
 }
