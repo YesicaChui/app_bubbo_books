@@ -1,5 +1,6 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import { Book } from '../interfaces/book'
+import CardBookItem from './CardBookItem'
 
 interface ListBooksProps {
   books: Book[]
@@ -12,10 +13,7 @@ const ListBooks: React.FC<ListBooksProps> = ({ books }) => {
         data={books}
         keyExtractor={elemento => elemento.id}
         renderItem={({ item }) =>
-          <View>
-            <Text>{item.title}</Text>
-            <Text>{item.author}</Text>
-          </View>
+         <CardBookItem book={item}/>
         }
       />
 
