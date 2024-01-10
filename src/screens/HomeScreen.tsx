@@ -27,7 +27,11 @@ const HomeScreen = () => {
   const [books, setBooks] = useState<Book[]>([])
   useEffect(()=>{
     //lectura de libros de api
-    setBooks(dataBooks)
+    fetch("http://192.168.0.14:3002/books")
+    .then(res=>res.json())
+    .then(data=>  setBooks(data))
+    .catch(error=>console.log("mierror",error))
+
   },[])
   return (
     <View>
