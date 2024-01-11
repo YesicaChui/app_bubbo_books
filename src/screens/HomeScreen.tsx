@@ -3,7 +3,7 @@ import ListBooks from '../components/ListBooks'
 import { useEffect, useState } from 'react'
 import { Book } from '../interfaces/book'
 import FormularioModal from '../components/FormularioModal'
-
+const urlServer = "http://192.168.0.14:3002"
 const HomeScreen = () => {
   const [books, setBooks] = useState<Book[]>([])
   const [isVisible, setIsVisible] = useState(false)
@@ -11,7 +11,7 @@ const HomeScreen = () => {
   const [book, setBook] = useState({} as Book)
 
   const readBooks = () => {
-    fetch("http://192.168.0.14:3002/books")
+    fetch(`${urlServer}/books`)
       .then(res => res.json())
       .then(data => setBooks(data))
       .catch(error => console.log("mierror", error))
@@ -26,7 +26,7 @@ const HomeScreen = () => {
   const saveBook = (book: Book, id: string) => {
     // console.log("libro insertado", book)
     if (!isEdit) {
-      fetch("http://192.168.0.14:3002/books", {
+      fetch(`${urlServer}/books`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const HomeScreen = () => {
         })
         .catch(error => console.log("mierror", error))
     } else {
-      fetch(`http://192.168.0.14:3002/books/${id}`, {
+      fetch(`${urlServer}/books/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const HomeScreen = () => {
   const deleteBook = (id: string) => {
     console.log(`se eliminara este id ${id}`)
 
-    fetch(`http://192.168.0.14:3002/books/${id}`, {
+    fetch(`${urlServer}/books/${id}`, {
       method: 'DELETE'
     })
       .then(res => {
@@ -71,7 +71,7 @@ const HomeScreen = () => {
   }
 
   const detailBook = (id: string) => {
-    fetch(`http://192.168.0.14:3002/books/${id}`)
+    fetch(`${urlServer}/books/${id}`)
       .then(res => res.json())
       .then(data => {
         Alert.alert(
