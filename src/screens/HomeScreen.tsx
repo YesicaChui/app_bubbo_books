@@ -100,10 +100,14 @@ const HomeScreen = () => {
 
   return (
     <View>
-      <Text>App Books Bubbo</Text>
-      <Pressable style={styles.boton_agregar} onPress={() => showCreateModal()}>
-        <Text>Agregar</Text>
-      </Pressable>
+      <Text style={styles.title}>App Books Bubbo</Text>
+      <View style={styles.boxButton}>
+        <View style={styles.containerButton}>
+
+          <Button  color={'green'} onPress={() => showCreateModal()} title='Agregar' />
+        </View>
+      </View>
+
       {isVisible
         ? <FormularioModal isEdit={isEdit} isVisible={isVisible} setIsVisible={setIsVisible} saveBook={saveBook} book={book} />
         : ""}
@@ -117,7 +121,25 @@ export default HomeScreen
 const styles = StyleSheet.create({
   boton_agregar: {
     backgroundColor: "green",
-    height: 50
-
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  boxButton: {
+    alignItems: 'center'
+  },
+  containerButton:{
+    width:200,
+  },
+  title: {
+    fontSize: 25,
+    textAlign: 'center',
+    padding: 20,
+   
+    fontWeight: '700'
+  },
+  textButton: {
+    fontSize: 18,
+    fontWeight: '900'
   }
 })

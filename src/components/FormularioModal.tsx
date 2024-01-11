@@ -60,21 +60,21 @@ const FormularioModal: React.FC<FormularioModalProps> = ({ book,isEdit,isVisible
     >
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
-          <Text>{isEdit?"Actualizar":"Insertar"} Libro</Text>
-          <Text>Titulo</Text>
+          <Text style={styles.title}>{isEdit?"Actualizar":"Insertar"} Libro</Text>
+          <Text style={styles.subTitle} >Titulo</Text>
           <TextInput
             value={title}
             onChangeText={(value) => setTitle(value)}
             placeholder='Ingrese el Titulo'
             style={styles.input} />
-          <Text>Autor</Text>
+          <Text style={styles.subTitle}>Autor</Text>
 
           <TextInput
           value={author}
             onChangeText={(value) => setAuthor(value)}
             placeholder='Ingrese el Autor'
             style={styles.input} />
-          <Text>Año</Text>
+          <Text style={styles.subTitle}>Año</Text>
 
           <TextInput
             value={year}
@@ -82,7 +82,7 @@ const FormularioModal: React.FC<FormularioModalProps> = ({ book,isEdit,isVisible
             placeholder='Ingrese el Año'
             style={styles.input} />
           <Button title={isEdit?"Actualizar":"Insertar"} onPress={() => handleSave()} />
-          <Button title='Cerrar' onPress={() =>close()} />
+          <Button title='Cerrar' onPress={() =>close()} color={"red"} />
         </View>
 
       </View>
@@ -110,10 +110,23 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    width: 150,
+    width: '100%',
     borderRadius: 5,
     borderColor: "green",
-    fontSize: 16,
-    backgroundColor: "orange"
+    fontSize: 14,
+    backgroundColor: "pink",
+    
+  },
+  title:{
+    textAlign: 'center',
+    fontSize:20,
+    fontWeight:'900',
+    color:"white"
+  },
+  subTitle:{
+    textAlign: 'center',
+    fontSize:20,
+    fontWeight:'500',
+    color:"white"
   }
 })
