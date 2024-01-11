@@ -4,17 +4,18 @@ import CardBookItem from './CardBookItem'
 
 interface ListBooksProps {
   books: Book[],
-  deleteBook:Function
+  deleteBook:Function,
+  detailBook:Function
 }
 
-const ListBooks: React.FC<ListBooksProps> = ({ books,deleteBook }) => {
+const ListBooks: React.FC<ListBooksProps> = ({ books,deleteBook,detailBook }) => {
   return (
     <View style={styles.listContainer}>
       <FlatList
         data={books}
         keyExtractor={elemento => elemento.id}
         renderItem={({ item }) =>
-         <CardBookItem book={item} deleteBook={deleteBook} />
+         <CardBookItem book={item} deleteBook={deleteBook} detailBook={detailBook}/>
         }
       />
 

@@ -1,4 +1,4 @@
-import { Button, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Alert, Button, Pressable, StyleSheet, Text, View } from 'react-native'
 import ListBooks from '../components/ListBooks'
 import { useEffect, useState } from 'react'
 import { Book } from '../interfaces/book'
@@ -38,7 +38,7 @@ const HomeScreen = () => {
       .catch(error => console.log("mierror", error))
   }
 
-  const deleteBook = (id:string)=>{
+  const deleteBook = (id: string) => {
     console.log(`se eliminara este id ${id}`)
 
     fetch(`http://192.168.0.14:3002/books/${id}`, {
@@ -51,6 +51,26 @@ const HomeScreen = () => {
       .catch(error => console.log("mierror", error))
   }
 
+  const detailBook = (id: string) => {
+    fetch(`http://192.168.0.14:3002/books/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        Alert.alert(
+          'Detalle Libro',
+          `IDBook: ${data.id} \nTitulo:${data.title} \nAutor:${data.author} \nAño:${data.year}`,
+          [
+            { text: 'Cerrar', onPress: () => console.log('OK Pressed') }
+          ],
+          { cancelable: false }
+        );
+      })
+      .catch(error => console.log("mierror", error))
+
+
+  }
+
+
+
 
   return (
     <View>
@@ -59,7 +79,7 @@ const HomeScreen = () => {
         <Text>Agregar</Text>
       </Pressable>
       <FormularioModal isVisible={isVisible} setIsVisible={setIsVisible} saveBook={createBook} />
-      <ListBooks books={books} deleteBook={deleteBook} />
+      <ListBooks books={books} deleteBook={deleteBook} detailBook={detailBook} />
     </View>
   )
 }

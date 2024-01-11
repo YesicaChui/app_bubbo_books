@@ -4,9 +4,10 @@ import { Book } from '../interfaces/book'
 
 interface CardBookItemProps {
   book: Book,
-  deleteBook:Function
+  deleteBook:Function,
+  detailBook:Function
 }
-const CardBookItem: React.FC<CardBookItemProps> = ({ book,deleteBook }) => {
+const CardBookItem: React.FC<CardBookItemProps> = ({ book,deleteBook, detailBook }) => {
   return (
     <View style={styles.cardBook}>
       <View style={styles.cardBoxText}>
@@ -15,7 +16,7 @@ const CardBookItem: React.FC<CardBookItemProps> = ({ book,deleteBook }) => {
       </View>
       <View style={styles.cardBoxButtons}>
         <Button color={"#fff"} title="✏️" onPress={() =>{}} />
-        <Button color={"#fff"} title="👁️" onPress={() =>{}} />
+        <Button color={"#fff"} title="👁️" onPress={() =>{detailBook(book.id)}} />
         <Button color={"#fff"} title="❌" onPress={() =>{deleteBook(book.id)}} />
       </View>
     </View>
