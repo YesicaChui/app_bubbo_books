@@ -8,6 +8,7 @@ const HomeScreen = () => {
   const [books, setBooks] = useState<Book[]>([])
   const [isVisible, setIsVisible] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
+  const [book,setBook]=useState({} as Book)
 
   const readBooks = () => {
     fetch("http://192.168.0.14:3002/books")
@@ -70,6 +71,7 @@ const HomeScreen = () => {
 
   const showEditModal = (book: Book) => {
     console.log("se mostrara modal de edicion", book)
+    setBook(book)
     setIsVisible(true)
     setIsEdit(true)
   }
@@ -85,7 +87,9 @@ const HomeScreen = () => {
       <Pressable style={styles.boton_agregar} onPress={() => showCreateModal()}>
         <Text>Agregar</Text>
       </Pressable>
-      <FormularioModal isEdit={isEdit} isVisible={isVisible} setIsVisible={setIsVisible} saveBook={createBook} />
+      {isVisible
+        ? <FormularioModal isEdit={isEdit} isVisible={isVisible} setIsVisible={setIsVisible} saveBook={createBook} book={book} />
+        : ""}
       <ListBooks books={books} deleteBook={deleteBook} detailBook={detailBook} showEditModal={showEditModal} />
     </View>
   )

@@ -1,18 +1,18 @@
 import { Button, Modal, StyleSheet, Text, TextInput, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Book } from '../interfaces/book'
 interface FormularioModalProps {
   isVisible: boolean,
   setIsVisible: React.Dispatch<boolean>,
   saveBook: Function,
-  isEdit:boolean
+  isEdit:boolean,
+  book:Book
 }
-const FormularioModal: React.FC<FormularioModalProps> = ({ isEdit,isVisible, setIsVisible, saveBook }) => {
+const FormularioModal: React.FC<FormularioModalProps> = ({ book,isEdit,isVisible, setIsVisible, saveBook }) => {
 
   const [title, setTitle] = useState("")
   const [author, setAuthor] = useState("")
   const [year, setYear] = useState("")
-
-
 
   const handleSave = () => {
 
@@ -41,6 +41,14 @@ const FormularioModal: React.FC<FormularioModalProps> = ({ isEdit,isVisible, set
     setIsVisible(false)
   }
 
+  useEffect(()=>{
+    if(isEdit){
+      setAuthor(book.author)
+      setTitle(book.author)
+      setYear(book.year)
+    }
+  },[])
+
   return (
     <Modal
       visible={isVisible}
@@ -51,20 +59,23 @@ const FormularioModal: React.FC<FormularioModalProps> = ({ isEdit,isVisible, set
           <Text>{isEdit?"Actualizar":"Insertar"} Libro</Text>
           <Text>Titulo</Text>
           <TextInput
+            value={title}
             onChangeText={(value) => setTitle(value)}
             placeholder='Ingrese el Titulo'
             style={styles.input} />
           <Text>Autor</Text>
 
           <TextInput
+          value={author}
             onChangeText={(value) => setAuthor(value)}
-            placeholder='Ingrese el Titulo'
+            placeholder='Ingrese el Autor'
             style={styles.input} />
           <Text>Año</Text>
 
           <TextInput
+            value={year}
             onChangeText={(value) => setYear(value)}
-            placeholder='Ingrese el Titulo'
+            placeholder='Ingrese el Año'
             style={styles.input} />
           <Button title={isEdit?"Actualizar":"Insertar"} onPress={() => handleSave()} />
           <Button title='Cerrar' onPress={() =>close()} />
