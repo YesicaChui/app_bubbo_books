@@ -6,7 +6,7 @@ import FormularioModal from '../components/FormularioModal'
 
 const HomeScreen = () => {
   const [books, setBooks] = useState<Book[]>([])
-  const [isVisible, setIsVisible]=useState(false)
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     //lectura de libros de api
@@ -16,13 +16,19 @@ const HomeScreen = () => {
       .catch(error => console.log("mierror", error))
 
   }, [])
+
+  const createBook = (book: Book) => {
+    console.log("libro insertado", book)
+  }
+
+
   return (
     <View>
       <Text>App Books Bubbo</Text>
       <Pressable style={styles.boton_agregar} onPress={() => setIsVisible(true)}>
         <Text>Agregar</Text>
       </Pressable>
-      <FormularioModal isVisible={isVisible} setIsVisible={setIsVisible}/>
+      <FormularioModal isVisible={isVisible} setIsVisible={setIsVisible} saveBook={createBook}/>
       <ListBooks books={books} />
     </View>
   )
