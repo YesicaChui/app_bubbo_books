@@ -4,23 +4,26 @@ import { Book } from '../interfaces/book'
 
 interface CardBookItemProps {
   book: Book,
-  deleteBook:Function,
-  detailBook:Function,
-  showEditModal:Function
+  deleteBook: Function,
+  detailBook: Function,
+  showEditModal: Function
 }
-const CardBookItem: React.FC<CardBookItemProps> = ({ book,deleteBook, detailBook,showEditModal }) => {
+const CardBookItem: React.FC<CardBookItemProps> = ({ book, deleteBook, detailBook, showEditModal }) => {
   return (
-    <View style={styles.cardBook}>
-      <View style={styles.cardBoxText}>
-        <Text>{book.title}</Text>
-        <Text>{book.author}</Text>
+    <Pressable onPress={() => { detailBook(book.id) }}>
+
+      <View style={styles.cardBook}>
+        <View style={styles.cardBoxText}>
+          <Text style={styles.title}>{book.title}</Text>
+          <Text style={styles.subTitle}>{book.author}</Text>
+        </View>
+        <View style={styles.cardBoxButtons}>
+          <Button color={"#fff"} title="✏️" onPress={() => { showEditModal(book) }} />
+          <Button color={"#fff"} title="👁️" onPress={() => { detailBook(book.id) }} />
+          <Button color={"#fff"} title="❌" onPress={() => { deleteBook(book.id) }} />
+        </View>
       </View>
-      <View style={styles.cardBoxButtons}>
-        <Button color={"#fff"} title="✏️" onPress={() =>{showEditModal(book)}} />
-        <Button color={"#fff"} title="👁️" onPress={() =>{detailBook(book.id)}} />
-        <Button color={"#fff"} title="❌" onPress={() =>{deleteBook(book.id)}} />
-      </View>
-    </View>
+    </Pressable>
   )
 }
 
@@ -38,12 +41,19 @@ const styles = StyleSheet.create({
     borderRadius: 8,
 
   },
-  cardBoxButtons:{
-    flex:2,
-    gap:7,
-    flexDirection:"row"
+  cardBoxButtons: {
+    flex: 2,
+    gap: 7,
+    flexDirection: "row"
   },
-  cardBoxText:{
-    flex:3
+  cardBoxText: {
+    flex: 3
   },
+  title:{
+    fontSize:18,
+    fontWeight:"700"
+  },
+  subTitle:{
+    
+  }
 })

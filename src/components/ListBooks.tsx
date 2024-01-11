@@ -28,6 +28,6 @@ export default ListBooks
 
 const styles = StyleSheet.create({
   listContainer: {   
-    paddingBottom:150
+    marginBottom:250
   },
 })
