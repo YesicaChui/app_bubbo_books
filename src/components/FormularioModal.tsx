@@ -81,8 +81,8 @@ const FormularioModal: React.FC<FormularioModalProps> = ({ book,isEdit,isVisible
             onChangeText={(value) => setYear(value)}
             placeholder='Ingrese el Año'
             style={styles.input} />
-          <Button title={isEdit?"Actualizar":"Insertar"} onPress={() => handleSave()} />
-          <Button title='Cerrar' onPress={() =>close()} color={"red"} />
+          <Button title={isEdit?"Actualizar":"Insertar"} onPress={() => handleSave()} color={"#FFC95F"} />
+          <Button title='Cerrar' onPress={() =>close()} color={"#862B0D"} />
         </View>
 
       </View>
@@ -97,14 +97,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(255,255,255,0.8)"
+    backgroundColor: "rgba(255,255,255,0.8)"    
   },
   modalContent: {
     width: "80%",
     borderRadius: 10,
     padding: 10,
     gap: 10,
-    backgroundColor: "#00d26a",
+    backgroundColor: "#B3C99C",
   },
   input: {
     borderWidth: 3,
@@ -114,19 +114,20 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: "green",
     fontSize: 14,
-    backgroundColor: "pink",
+    backgroundColor: "#F5F0BB",
     
   },
   title:{
     textAlign: 'center',
-    fontSize:20,
+    fontSize:25,
     fontWeight:'900',
     color:"white"
   },
   subTitle:{
     textAlign: 'center',
     fontSize:20,
-    fontWeight:'500',
+    fontWeight:'900',
     color:"white"
+    
   }
 })

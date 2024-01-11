@@ -103,8 +103,7 @@ const HomeScreen = () => {
       <Text style={styles.title}>App Books Bubbo</Text>
       <View style={styles.boxButton}>
         <View style={styles.containerButton}>
-
-          <Button  color={'green'} onPress={() => showCreateModal()} title='Agregar' />
+          <Button  color={'#219C90'} onPress={() => showCreateModal()} title='Agregar' />
         </View>
       </View>
 
@@ -135,11 +134,11 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     padding: 20,
-   
-    fontWeight: '700'
+    fontWeight: '700',
+    color:'#245953'
   },
   textButton: {
     fontSize: 18,
-    fontWeight: '900'
+    fontWeight: '900',
   }
 })
