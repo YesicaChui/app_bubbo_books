@@ -25,7 +25,11 @@ const FormularioModal: React.FC<FormularioModalProps> = ({ book,isEdit,isVisible
       author: author,
       year: year
     }
-    saveBook(data)
+    if(isEdit){
+      saveBook(data,book.id)
+    }else{
+      saveBook(data)
+    }
     clean()
     setIsVisible(false)
   }
@@ -44,7 +48,7 @@ const FormularioModal: React.FC<FormularioModalProps> = ({ book,isEdit,isVisible
   useEffect(()=>{
     if(isEdit){
       setAuthor(book.author)
-      setTitle(book.author)
+      setTitle(book.title)
       setYear(book.year)
     }
   },[])

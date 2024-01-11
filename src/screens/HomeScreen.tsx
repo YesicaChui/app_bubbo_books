@@ -8,7 +8,7 @@ const HomeScreen = () => {
   const [books, setBooks] = useState<Book[]>([])
   const [isVisible, setIsVisible] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
-  const [book,setBook]=useState({} as Book)
+  const [book, setBook] = useState({} as Book)
 
   const readBooks = () => {
     fetch("http://192.168.0.14:3002/books")
@@ -23,21 +23,38 @@ const HomeScreen = () => {
 
   }, [])
 
-  const createBook = (book: Book) => {
+  const saveBook = (book: Book, id: string) => {
     // console.log("libro insertado", book)
-    fetch("http://192.168.0.14:3002/books", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        // You can include additional headers here
-      },
-      body: JSON.stringify(book)
-    })
-      .then(res => {
-        console.log("Libro insertado")
-        readBooks()
+    if (!isEdit) {
+      fetch("http://192.168.0.14:3002/books", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // You can include additional headers here
+        },
+        body: JSON.stringify(book)
       })
-      .catch(error => console.log("mierror", error))
+        .then(res => {
+          console.log("Libro insertado")
+          readBooks()
+        })
+        .catch(error => console.log("mierror", error))
+    } else {
+      fetch(`http://192.168.0.14:3002/books/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          // You can include additional headers here
+        },
+        body: JSON.stringify(book)
+      })
+        .then(res => {
+          console.log("Libro actualizado")
+          readBooks()
+        })
+        .catch(error => console.log("mierror", error))
+
+    }
   }
 
   const deleteBook = (id: string) => {
@@ -88,7 +105,7 @@ const HomeScreen = () => {
         <Text>Agregar</Text>
       </Pressable>
       {isVisible
-        ? <FormularioModal isEdit={isEdit} isVisible={isVisible} setIsVisible={setIsVisible} saveBook={createBook} book={book} />
+        ? <FormularioModal isEdit={isEdit} isVisible={isVisible} setIsVisible={setIsVisible} saveBook={saveBook} book={book} />
         : ""}
       <ListBooks books={books} deleteBook={deleteBook} detailBook={detailBook} showEditModal={showEditModal} />
     </View>
