@@ -5,9 +5,10 @@ import { Book } from '../interfaces/book'
 interface CardBookItemProps {
   book: Book,
   deleteBook:Function,
-  detailBook:Function
+  detailBook:Function,
+  showEditModal:Function
 }
-const CardBookItem: React.FC<CardBookItemProps> = ({ book,deleteBook, detailBook }) => {
+const CardBookItem: React.FC<CardBookItemProps> = ({ book,deleteBook, detailBook,showEditModal }) => {
   return (
     <View style={styles.cardBook}>
       <View style={styles.cardBoxText}>
@@ -15,7 +16,7 @@ const CardBookItem: React.FC<CardBookItemProps> = ({ book,deleteBook, detailBook
         <Text>{book.author}</Text>
       </View>
       <View style={styles.cardBoxButtons}>
-        <Button color={"#fff"} title="✏️" onPress={() =>{}} />
+        <Button color={"#fff"} title="✏️" onPress={() =>{showEditModal(book)}} />
         <Button color={"#fff"} title="👁️" onPress={() =>{detailBook(book.id)}} />
         <Button color={"#fff"} title="❌" onPress={() =>{deleteBook(book.id)}} />
       </View>

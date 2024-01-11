@@ -7,6 +7,7 @@ import FormularioModal from '../components/FormularioModal'
 const HomeScreen = () => {
   const [books, setBooks] = useState<Book[]>([])
   const [isVisible, setIsVisible] = useState(false)
+  const [isEdit, setIsEdit] = useState(false)
 
   const readBooks = () => {
     fetch("http://192.168.0.14:3002/books")
@@ -65,21 +66,27 @@ const HomeScreen = () => {
         );
       })
       .catch(error => console.log("mierror", error))
-
-
   }
 
+  const showEditModal = (book: Book) => {
+    console.log("se mostrara modal de edicion", book)
+    setIsVisible(true)
+    setIsEdit(true)
+  }
 
-
+  const showCreateModal = () => {
+    setIsVisible(true)
+    setIsEdit(false)
+  }
 
   return (
     <View>
       <Text>App Books Bubbo</Text>
-      <Pressable style={styles.boton_agregar} onPress={() => setIsVisible(true)}>
+      <Pressable style={styles.boton_agregar} onPress={() => showCreateModal()}>
         <Text>Agregar</Text>
       </Pressable>
-      <FormularioModal isVisible={isVisible} setIsVisible={setIsVisible} saveBook={createBook} />
-      <ListBooks books={books} deleteBook={deleteBook} detailBook={detailBook} />
+      <FormularioModal isEdit={isEdit} isVisible={isVisible} setIsVisible={setIsVisible} saveBook={createBook} />
+      <ListBooks books={books} deleteBook={deleteBook} detailBook={detailBook} showEditModal={showEditModal} />
     </View>
   )
 }

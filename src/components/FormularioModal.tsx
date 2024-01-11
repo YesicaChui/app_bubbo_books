@@ -3,9 +3,10 @@ import React, { useState } from 'react'
 interface FormularioModalProps {
   isVisible: boolean,
   setIsVisible: React.Dispatch<boolean>,
-  saveBook: Function
+  saveBook: Function,
+  isEdit:boolean
 }
-const FormularioModal: React.FC<FormularioModalProps> = ({ isVisible, setIsVisible, saveBook }) => {
+const FormularioModal: React.FC<FormularioModalProps> = ({ isEdit,isVisible, setIsVisible, saveBook }) => {
 
   const [title, setTitle] = useState("")
   const [author, setAuthor] = useState("")
@@ -47,7 +48,7 @@ const FormularioModal: React.FC<FormularioModalProps> = ({ isVisible, setIsVisib
     >
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
-          <Text>Agregar Libro</Text>
+          <Text>{isEdit?"Actualizar":"Insertar"} Libro</Text>
           <Text>Titulo</Text>
           <TextInput
             onChangeText={(value) => setTitle(value)}
@@ -65,7 +66,7 @@ const FormularioModal: React.FC<FormularioModalProps> = ({ isVisible, setIsVisib
             onChangeText={(value) => setYear(value)}
             placeholder='Ingrese el Titulo'
             style={styles.input} />
-          <Button title='Insertar' onPress={() => handleSave()} />
+          <Button title={isEdit?"Actualizar":"Insertar"} onPress={() => handleSave()} />
           <Button title='Cerrar' onPress={() =>close()} />
         </View>
 
