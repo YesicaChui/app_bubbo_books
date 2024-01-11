@@ -8,7 +8,7 @@ interface ListBooksProps {
 
 const ListBooks: React.FC<ListBooksProps> = ({ books }) => {
   return (
-    <View>
+    <View style={styles.listContainer}>
       <FlatList
         data={books}
         keyExtractor={elemento => elemento.id}
@@ -23,4 +23,8 @@ const ListBooks: React.FC<ListBooksProps> = ({ books }) => {
 
 export default ListBooks
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  listContainer: {   
+    paddingBottom:150
+  },
+})
