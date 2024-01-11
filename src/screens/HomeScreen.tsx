@@ -8,17 +8,36 @@ const HomeScreen = () => {
   const [books, setBooks] = useState<Book[]>([])
   const [isVisible, setIsVisible] = useState(false)
 
+  const readBooks=()=>{
+    fetch("http://192.168.0.14:3002/books")
+    .then(res => res.json())
+    .then(data => setBooks(data))
+    .catch(error => console.log("mierror", error))
+  }
+
   useEffect(() => {
     //lectura de libros de api
-    fetch("http://192.168.0.14:3002/books")
-      .then(res => res.json())
-      .then(data => setBooks(data))
-      .catch(error => console.log("mierror", error))
+    readBooks()
 
   }, [])
 
   const createBook = (book: Book) => {
-    console.log("libro insertado", book)
+    // console.log("libro insertado", book)
+    fetch("http://192.168.0.14:3002/books",{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // You can include additional headers here
+      },
+      body: JSON.stringify(book)
+    })
+    .then(res => {
+      console.log("Libro insertado")
+      readBooks()
+    })
+    .catch(error => console.log("mierror", error))
+
+
   }
 
 
@@ -38,7 +57,8 @@ export default HomeScreen
 
 const styles = StyleSheet.create({
   boton_agregar: {
-    backgroundColor: "green"
+    backgroundColor: "green",
+    height:50
 
   }
 })

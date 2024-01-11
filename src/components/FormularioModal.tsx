@@ -1,15 +1,45 @@
 import { Button, Modal, StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 interface FormularioModalProps {
   isVisible: boolean,
   setIsVisible: React.Dispatch<boolean>,
   saveBook: Function
 }
 const FormularioModal: React.FC<FormularioModalProps> = ({ isVisible, setIsVisible, saveBook }) => {
+
+  const [title, setTitle] = useState("")
+  const [author, setAuthor] = useState("")
+  const [year, setYear] = useState("")
+
+
+
   const handleSave = () => {
-    saveBook()
+
+    if(title==""||author==""||year=="") {
+      console.log("no se puede insertar faltan datos")
+      return
+    }
+    const data = {
+      title: title,
+      author: author,
+      year: year
+    }
+    saveBook(data)
+    clean()
     setIsVisible(false)
   }
+
+  const clean=()=>{
+    setTitle("")
+    setAuthor("")
+    setYear("")
+  }
+
+  const close=()=>{
+    clean()
+    setIsVisible(false)
+  }
+
   return (
     <Modal
       visible={isVisible}
@@ -19,12 +49,24 @@ const FormularioModal: React.FC<FormularioModalProps> = ({ isVisible, setIsVisib
         <View style={styles.modalContent}>
           <Text>Agregar Libro</Text>
           <Text>Titulo</Text>
-          <TextInput placeholder='Ingrese el Titulo' style={styles.input} />
+          <TextInput
+            onChangeText={(value) => setTitle(value)}
+            placeholder='Ingrese el Titulo'
+            style={styles.input} />
           <Text>Autor</Text>
-          <TextInput placeholder='Ingrese el Titulo' style={styles.input} />
+
+          <TextInput
+            onChangeText={(value) => setAuthor(value)}
+            placeholder='Ingrese el Titulo'
+            style={styles.input} />
           <Text>Año</Text>
-          <TextInput placeholder='Ingrese el Titulo' style={styles.input} />
+
+          <TextInput
+            onChangeText={(value) => setYear(value)}
+            placeholder='Ingrese el Titulo'
+            style={styles.input} />
           <Button title='Insertar' onPress={() => handleSave()} />
+          <Button title='Cerrar' onPress={() =>close()} />
         </View>
 
       </View>
